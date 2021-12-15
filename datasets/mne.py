@@ -14,7 +14,7 @@ def create_from_mne_raw(
         raws, trial_start_offset_samples, trial_stop_offset_samples,
         window_size_samples, window_stride_samples, drop_last_window,
         descriptions=None, mapping=None, preload=False, drop_bad_windows=True,
-        accepted_bads_ratio=0.0):
+        accepted_bads_ratio=0.0, on_missing='ignore'):
     """Create WindowsDatasets from mne.RawArrays
 
     Parameters
@@ -80,6 +80,7 @@ def create_from_mne_raw(
         drop_bad_windows=drop_bad_windows,
         preload=preload,
         accepted_bads_ratio=accepted_bads_ratio,
+        on_missing=on_missing
     )
     return windows_datasets
 
