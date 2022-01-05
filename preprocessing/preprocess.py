@@ -152,8 +152,8 @@ def preprocess(concat_ds, preprocessors, save_dir=None, overwrite=False,
         _check_save_dir_empty(save_dir)
 
     if not isinstance(preprocessors, Iterable):
-        raise ValueError(
-            'preprocessors must be a list of Preprocessor objects.')
+        # wrap preprocessor object in list if single preprocessor object
+        preprocessors = [preprocessors] if type(preprocessors) != list  else preprocessors
     for elem in preprocessors:
         assert hasattr(elem, 'apply'), (
             'Preprocessor object needs an `apply` method.')
