@@ -76,7 +76,8 @@ class SleepPhysionet(BaseConcatDataset):
         exclude = list(ch_mapping.keys()) if load_eeg_only else ()
 
         raw = mne.io.read_raw_edf(raw_fname, preload=preload, exclude=exclude)
-        if sfreq is not None or str(sfreq) != raw.info['sfreq']:
+        # resample if sfreq is different then registered
+        if sfreq is not None and sfreq != raw.info['sfreq']:
             print(f'TO resample: {sfreq}')
             print(f'Sampling rate before: {raw.info["sfreq"]}')
             raw = mne.io.Raw.resample(raw, sfreq, n_jobs=n_jobs)
